@@ -2,7 +2,6 @@ package com.rydzwr.service;
 
 import com.rydzwr.dto.UserDto;
 import com.rydzwr.exception.InvalidCredentialsException;
-import com.rydzwr.exception.UnauthorizedCallException;
 import com.rydzwr.mapper.UserMapper;
 import com.rydzwr.model.User;
 import com.rydzwr.repository.UserRepository;

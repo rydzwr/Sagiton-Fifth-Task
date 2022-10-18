@@ -1,7 +1,6 @@
 package com.rydzwr.controller;
 
 import com.rydzwr.dto.UserDto;
-import com.rydzwr.exception.UnauthorizedCallException;
 import com.rydzwr.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

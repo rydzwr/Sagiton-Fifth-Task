@@ -1,7 +1,6 @@
 package com.rydzwr.service;
 
 import com.rydzwr.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
