@@ -27,11 +27,13 @@ public class User {
     private String email;
     @NotNull
     private String password;
+    private String userSessionCode;
 
-    public User(String name, String surname, String email, String password) {
+    public User(String name, String surname, String email, String password, String userSessionCode) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.userSessionCode = userSessionCode;
     }
 }

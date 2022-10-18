@@ -20,12 +20,19 @@ public class UserDto implements UserDetails {
     private String surname;
     private String email;
     private String password;
+    private String userSessionCode;
 
-    public UserDto(String name, String surname, String email, String password) {
+    public UserDto(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
+    public UserDto(String name, String surname, String email, String password, String userSessionCode) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.userSessionCode = userSessionCode;
     }
 
     @Override

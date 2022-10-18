@@ -19,7 +19,7 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         userRepository.deleteAll();
-        userRepository.save(new User("rootName", "rootSurname", "rootEmail", "rootPassword"));
-        userRepository.save(new User("adminName", "adminSurname", "adminEmail", "adminPassword"));
+        userRepository.save(new User("rootName", "rootSurname", "rootEmail", "rootPassword", "123"));
+        userRepository.save(new User("adminName", "adminSurname", "adminEmail", "adminPassword", "125"));
     }
 }
