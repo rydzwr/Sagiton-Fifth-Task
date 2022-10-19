@@ -20,13 +20,13 @@ public class UserController {
     }
 
     @GetMapping(value = "/userDetails")
-    public ResponseEntity<UserDto> getUserData(@RequestHeader String UserSessionCode) {
-        return ResponseEntity.ok(service.getUserData(UserSessionCode));
+    public ResponseEntity<UserDto> getUserData(@RequestHeader("UserSessionCode") String userSessionCode) {
+        return ResponseEntity.ok(service.getUserData(userSessionCode));
     }
 
     @PostMapping(value = "/logout")
-    public ResponseEntity<Void> logout(@RequestHeader String UserSessionCode) {
-        service.logout(UserSessionCode);
+    public ResponseEntity<Void> logout(@RequestHeader("UserSessionCode") String userSessionCode) {
+        service.logout(userSessionCode);
         return ResponseEntity.ok().build();
     }
 }

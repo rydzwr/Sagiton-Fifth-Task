@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public String loginUser(UserDto userDto) {
-        User user = mapper.mapToUser((UserDto) nameValidator.loadUserByUsername(userDto.getUsername()));
+       User user = nameValidator.loadUserByUsername(userDto.getUsername());
 
         if (!user.getPassword().equals(userDto.getPassword())) {
             throw new InvalidCredentialsException("Invalid Credentials!");

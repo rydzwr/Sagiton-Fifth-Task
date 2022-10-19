@@ -2,6 +2,7 @@ package com.rydzwr.mapper;
 
 import com.rydzwr.dto.UserDto;
 import com.rydzwr.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,9 +11,7 @@ public class UserMapper {
         return new UserDto(
                 user.getName(),
                 user.getSurname(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getUserSessionCode()
+                user.getEmail()
         );
     }
 
@@ -25,4 +24,5 @@ public class UserMapper {
                 userDto.getUserSessionCode()
         );
     }
+
 }

@@ -2,6 +2,7 @@ package com.rydzwr.service;
 
 import com.rydzwr.exception.InvalidCredentialsException;
 import com.rydzwr.mapper.UserMapper;
+import com.rydzwr.model.User;
 import com.rydzwr.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,9 +19,9 @@ public class UserNameValidator implements UserDetailsService {
         this.mapper = mapper;
     }
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         if (repository.existsByName(username)) {
-            return mapper.mapToUserDto(repository.getUserByName(username));
+            return repository.getUserByName(username);
         }
         throw new InvalidCredentialsException("Invalid Credentials!");
     }

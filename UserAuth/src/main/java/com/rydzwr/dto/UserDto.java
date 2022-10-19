@@ -11,8 +11,6 @@ import java.util.Collection;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserDto implements UserDetails {
 
     int id;
@@ -22,12 +20,10 @@ public class UserDto implements UserDetails {
     private String password;
     private String userSessionCode;
 
-    public UserDto(String name, String surname, String email, String password, String userSessionCode) {
+    public UserDto(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.password = password;
-        this.userSessionCode = userSessionCode;
     }
 
     @Override

@@ -28,6 +28,7 @@ public class LoggedUsersFilter extends OncePerRequestFilter {
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String sessionCode = request.getHeader("UserSessionCode");
+        System.out.println(sessionCode);
         if (!userService.authoriseRequest(sessionCode))
             response.sendError(HttpStatus.FORBIDDEN.value(), "Unauthorized");
         else
