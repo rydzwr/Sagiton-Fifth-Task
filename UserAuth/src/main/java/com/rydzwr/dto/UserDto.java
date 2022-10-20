@@ -1,8 +1,7 @@
 package com.rydzwr.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +10,7 @@ import java.util.Collection;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class UserDto implements UserDetails {
 
     int id;
