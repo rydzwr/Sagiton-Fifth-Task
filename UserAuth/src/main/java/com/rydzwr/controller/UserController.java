@@ -21,9 +21,6 @@ public class UserController {
     }
 
     @GetMapping(value = "/userDetails")
-    // HandlerMethodArgumentResolver -  UserSessionCodeMethodArgumentResolver
-    // w nim wyciągasz z Requesta Header UserSessionCode i zwracasz jako string
-    // @UserCode String userSessionCode
     public ResponseEntity<UserDto> getUserData(@UserCode(value = "UserSessionCode") String userSessionCode) {
         return ResponseEntity.ok(service.getUserData(userSessionCode));
     }
