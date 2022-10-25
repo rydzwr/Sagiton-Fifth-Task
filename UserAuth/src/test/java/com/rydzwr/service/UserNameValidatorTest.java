@@ -2,7 +2,6 @@ package com.rydzwr.service;
 
 import com.rydzwr.UserAuthApplication;
 import com.rydzwr.exception.InvalidCredentialsException;
-import com.rydzwr.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UserAuthApplication.class)
 public class UserNameValidatorTest {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserNameValidator validator;
