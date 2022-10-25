@@ -2,6 +2,7 @@ package com.rydzwr.service;
 
 import com.rydzwr.dto.UserDto;
 import com.rydzwr.exception.InvalidCredentialsException;
+import com.rydzwr.exception.UnauthorizedCallException;
 import com.rydzwr.mapper.UserMapper;
 import com.rydzwr.model.User;
 import com.rydzwr.repository.UserRepository;
@@ -36,12 +37,18 @@ public class UserService {
     }
 
     public void logout(String userSessionCode) {
+        if (!sessionCodeValidator.validate(userSessionCode)) {
+            throw new UnauthorizedCallException("Unauthorized!");
+        }
         User user = repository.getUserByUserSessionCode(userSessionCode);
         user.setUserSessionCode(null);
         repository.save(user);
     }
 
     public UserDto getUserData(String sessionCode) {
+        if (!sessionCodeValidator.validate(sessionCode)) {
+            throw new UnauthorizedCallException("Unauthorized!");
+        }
         return mapper.mapToUserDto(repository.getUserByUserSessionCode(sessionCode));
     }
 
