@@ -17,6 +17,6 @@ public class UserSessionCodeMethodArgumentResolver implements HandlerMethodArgum
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         UserCode ann = parameter.getParameter().getAnnotation(UserCode.class);
-        return webRequest.getHeader(ann.value());
+        return webRequest.getHeader("UserSessionCode");
     }
 }

@@ -21,18 +21,18 @@ public class UserController {
     }
 
     @GetMapping(value = "/userDetails")
-    public ResponseEntity<UserDto> getUserData(@UserCode(value = "UserSessionCode") String userSessionCode) {
+    public ResponseEntity<UserDto> getUserData(@UserCode String userSessionCode) {
         return ResponseEntity.ok(service.getUserData(userSessionCode));
     }
 
     @PostMapping(value = "/logout")
-    public ResponseEntity<Void> logout(@UserCode(value = "UserSessionCode") String userSessionCode) {
+    public ResponseEntity<Void> logout(@UserCode String userSessionCode) {
         service.logout(userSessionCode);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/authorize")
-    public ResponseEntity<Boolean> authorize(@UserCode(value = "UserSessionCode") String userSessionCode){
+    public ResponseEntity<Boolean> authorize(@UserCode String userSessionCode){
         return ResponseEntity.ok(service.authoriseRequest(userSessionCode));
     }
 }

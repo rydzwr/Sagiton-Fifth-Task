@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userService")
-@Transactional
 public class UserService {
     private final UserNameValidator nameValidator;
     private final UserMapper mapper;
@@ -24,34 +23,35 @@ public class UserService {
         this.sessionCodeValidator = sessionCodeValidator;
     }
 
+    @Transactional
     public String loginUser(UserDto userDto) {
-       User user = nameValidator.loadUserByUsername(userDto.getUsername());
-
-        if (!user.getPassword().equals(userDto.getPassword())) {
+        if (repository.checkPassword(userDto.getUsername(), userDto.getPassword()) == 0) {
             throw new InvalidCredentialsException("Invalid Credentials!");
         }
 
-        user.setUserSessionCode(UserSessionCodeGenerator.generate());
-        repository.save(user);
-        return user.getUserSessionCode();
+        String userSessionCode = UserSessionCodeGenerator.generate();
+        repository.updateSessionCode(userDto.getUsername(), userSessionCode);
+        return userSessionCode;
     }
 
+    @Transactional
     public void logout(String userSessionCode) {
         if (!sessionCodeValidator.validate(userSessionCode)) {
-            throw new UnauthorizedCallException("Unauthorized!");
+            throw new UnauthorizedCallException();
         }
-        User user = repository.getUserByUserSessionCode(userSessionCode);
-        user.setUserSessionCode(null);
-        repository.save(user);
+
+        repository.clearUserSession(userSessionCode);
     }
 
+    @Transactional(readOnly = true)
     public UserDto getUserData(String sessionCode) {
         if (!sessionCodeValidator.validate(sessionCode)) {
-            throw new UnauthorizedCallException("Unauthorized!");
+            throw new UnauthorizedCallException();
         }
         return mapper.mapToUserDto(repository.getUserByUserSessionCode(sessionCode));
     }
 
+    @Transactional(readOnly = true)
     public boolean authoriseRequest(String userSessionCode) {
         return sessionCodeValidator.validate(userSessionCode);
     }
