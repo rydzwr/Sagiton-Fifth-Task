@@ -4,7 +4,6 @@ import com.rydzwr.dto.UserDto;
 import com.rydzwr.exception.InvalidCredentialsException;
 import com.rydzwr.exception.UnauthorizedCallException;
 import com.rydzwr.mapper.UserMapper;
-import com.rydzwr.model.User;
 import com.rydzwr.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,8 @@ public class UserService {
 
     @Transactional
     public String loginUser(UserDto userDto) {
-        if (repository.checkPassword(userDto.getUsername(), userDto.getPassword()) == 0) {
+        String password = String.valueOf(userDto.getPassword().hashCode());
+        if (repository.checkPassword(userDto.getUsername(), password) == 0) {
             throw new InvalidCredentialsException("Invalid Credentials!");
         }
 

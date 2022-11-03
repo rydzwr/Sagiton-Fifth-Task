@@ -18,9 +18,13 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
+        String rootPassword = String.valueOf("rootPassword".hashCode());
+        String adminPassword = String.valueOf("adminPassword".hashCode());
+        String testPassword = String.valueOf("testPassword".hashCode());
+
         userRepository.deleteAll();
-        userRepository.save(new User("rootName", "rootSurname", "rootEmail", "rootPassword", null));
-        userRepository.save(new User("adminName", "adminSurname", "adminEmail", "adminPassword", null));
-        userRepository.save(new User("testName", "testSurname", "testEmail", "testPassword", "123"));
+        userRepository.save(new User("rootName", "rootSurname", "rootEmail", rootPassword, null));
+        userRepository.save(new User("adminName", "adminSurname", "adminEmail", adminPassword, null));
+        userRepository.save(new User("testName", "testSurname", "testEmail", testPassword, "123"));
     }
 }
