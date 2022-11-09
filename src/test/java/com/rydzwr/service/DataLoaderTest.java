@@ -27,7 +27,7 @@ public class DataLoaderTest {
     @Test
     public void listsShouldBeEqual() {
         List<String> usersNames = userRepository.findAll().stream()
-                .map(User::getUsername)
+                .map(User::getName)
                 .collect(Collectors.toList());
         assertThat(usersNames.equals(validUserNames));
     }
