@@ -3,34 +3,41 @@ package com.rydzwr.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
-
-public class CustomUserDetails implements UserDetails {
-
+public class UserPrincipal implements UserDetails {
     private User user;
 
-    public CustomUserDetails(User user) {
-        super();
+    public UserPrincipal(User user){
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        // Extract list of permissions (name)
+
+        // Extract list of roles (ROLE_name)
+        this.user.getRoleList().forEach(r -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+            authorities.add(authority);
+        });
+
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return this.user.getUsername();
     }
 
     @Override
@@ -50,6 +57,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.user.getActive() == 1;
     }
 }

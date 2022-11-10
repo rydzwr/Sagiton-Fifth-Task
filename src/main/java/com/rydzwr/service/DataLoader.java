@@ -12,26 +12,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    BCryptPasswordEncoder encoder;
-
-    @Autowired
-    public DataLoader(UserRepository userRepository) {
+    public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void run(ApplicationArguments args) {
-
-
-        String rootPassword = encoder.encode("rootPassword");
-        String adminPassword = encoder.encode("adminPassword");
-        String testPassword = encoder.encode("testPassword");
-
         userRepository.deleteAll();
-        userRepository.save(new User("rootName", "rootSurname", "rootEmail", rootPassword, null, "USER"));
-        userRepository.save(new User("adminName", "adminSurname", "adminEmail", adminPassword, null, "ADMIN"));
-        userRepository.save(new User("testName", "testSurname", "testEmail", testPassword, "123", "USER"));
+        userRepository.save(new User("user",passwordEncoder.encode("user123"),"USER"));
+        userRepository.save(new User("admin",passwordEncoder.encode("admin123"),"ADMIN"));
     }
 }
