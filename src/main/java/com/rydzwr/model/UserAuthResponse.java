@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class JsonResponse {
+public class UserAuthResponse {
     private String role;
 }
